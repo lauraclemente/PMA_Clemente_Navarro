@@ -1,3 +1,14 @@
+/*
+FALTA:
+- treure els decimals "inútils"
+- al posar l'=, ha d'anar calcular
+- fer càlculs encadenats
+
+*/
+
+
+
+
 package edu.upc.pda.clemente.laura.calculadora;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +19,7 @@ import android.widget.TextView;
 public class CalculatorActivity extends AppCompatActivity {
 
     //ATRIBUTS
-    double num1=0, num2=0, result=0;
+    double num2=0, result=0;
     String operador = "";
     Boolean equal = false;
     Boolean dot = false;
@@ -88,44 +99,43 @@ public class CalculatorActivity extends AppCompatActivity {
         text_result.setText("");
         equal = false;
         //equal2 = false;
-        /*num1 = 0;
         num2 = 0;
         operador = "";
-        result = 0;*/
+        result = 0;
     }
     public void clear(View view){
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText("");
         dot = false;
-        equal = false;
         //equal2 = false;
     }
 
     public void clickplus(View view) {
         TextView text_result = (TextView) findViewById(R.id.text_result);
         textscreen = text_result.getText().toString();
-        num1 = Double.parseDouble(textscreen);
+        result = Double.parseDouble(textscreen);
         clear(view);
         operador = "+";
     }
     public void clickneg(View view) {
         TextView text_result = (TextView) findViewById(R.id.text_result);
         textscreen = text_result.getText().toString();
-        num1 = Double.parseDouble(textscreen);
+        result = Double.parseDouble(textscreen);
         clear(view);
         operador = "-";
+
     }
     public void clickmult(View view) {
         TextView text_result = (TextView) findViewById(R.id.text_result);
         textscreen = text_result.getText().toString();
-        num1 = Double.parseDouble(textscreen);
+        result = Double.parseDouble(textscreen);
         clear(view);
         operador = "*";
     }
     public void clickdiv(View view) {
         TextView text_result = (TextView) findViewById(R.id.text_result);
         textscreen = text_result.getText().toString();
-        num1 = Double.parseDouble(textscreen);
+        result = Double.parseDouble(textscreen);
         clear(view);
         operador = "/";
     }
@@ -142,12 +152,13 @@ public class CalculatorActivity extends AppCompatActivity {
         num2 = Double.parseDouble(textscreen);
         /*if (!equal2) {*/
             switch (operador){
-                case "+": result = num1 + num2; break;
-                case "-": result = num1 - num2; break;
-                case "*": result = num1 * num2; break;
-                case "/": result = num1 / num2; break;
+                case "+": result = result + num2; break;
+                case "-": result = result - num2; break;
+                case "*": result = result * num2; break;
+                case "/": result = result / num2; break;
                 //default:
             }
+            equal = false;
             textscreen = String.format("%f", result);
             text_result.setText(textscreen);
         /*} else {
