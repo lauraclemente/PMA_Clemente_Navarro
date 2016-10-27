@@ -7,6 +7,8 @@ FALTA:
 - Click CLEAR té problemes - FET! :)
 - Limitar els decimals en pantalla
 - Quan s'apreta qualsevol operador, no ha de netejar el nombre per pantalla - FET! :)
+- Botó d'= surt gris - NO FET... :(
+- els botons de números no es nota quan s'apreten - No hi ha hagut temps!
 
 */
 
