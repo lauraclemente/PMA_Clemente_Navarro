@@ -23,6 +23,8 @@ public class CalculatorActivity extends AppCompatActivity {
     String operador = "";
     Boolean equal = false;
     Boolean dot = false;
+    Boolean opera = false;
+    Boolean res = false;
     //Boolean equal2 = false;
     String textscreen = "";
 
@@ -37,51 +39,61 @@ public class CalculatorActivity extends AppCompatActivity {
         //Detectem quan s'apreta cada botó
     public void click0(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false; //si 'operation' ha actuat, per tant tenim un resultat, res=true, s'ha de netejar vista per tornar a escriure un número nou.
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "0");
     }
     public void click1(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "1");
     }
     public void click2(View view) {
         if (equal) clear(view); equal = false;// equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "2");
     }
     public void click3(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "3");
     }
     public void click4(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "4");
     }
     public void click5(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "5");
     }
     public void click6(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "6");
     }
     public void click7(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "7");
     }
     public void click8(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "8");
     }
     public void click9(View view) {
         if (equal) clear(view); equal = false; //equal2 = false;
+        if (res) clear(view); res = false;
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText(text_result.getText() + "9");
     }
@@ -107,60 +119,92 @@ public class CalculatorActivity extends AppCompatActivity {
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText("");
         dot = false;
+        res = false;
         //equal2 = false;
     }
 
     public void clickplus(View view) {
-        TextView text_result = (TextView) findViewById(R.id.text_result);
-        textscreen = text_result.getText().toString();
-        result = Double.parseDouble(textscreen);
-        clear(view);
+        if (!opera) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+            clear(view);
+        } else {
+            operation(view);
+        }
         operador = "+";
+        opera = true;
     }
     public void clickneg(View view) {
-        TextView text_result = (TextView) findViewById(R.id.text_result);
-        textscreen = text_result.getText().toString();
-        result = Double.parseDouble(textscreen);
-        clear(view);
+        if (!opera) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+            clear(view);
+        } else {
+            operation(view);
+        }
         operador = "-";
+        opera = true;
 
     }
     public void clickmult(View view) {
-        TextView text_result = (TextView) findViewById(R.id.text_result);
-        textscreen = text_result.getText().toString();
-        result = Double.parseDouble(textscreen);
-        clear(view);
+        if (!opera) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+            clear(view);
+        }else {
+            operation(view);
+
+        }
         operador = "*";
+        opera = true;
     }
     public void clickdiv(View view) {
-        TextView text_result = (TextView) findViewById(R.id.text_result);
-        textscreen = text_result.getText().toString();
-        result = Double.parseDouble(textscreen);
-        clear(view);
+        if (!opera) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+            clear(view);
+        }else{
+            operation(view);
+        }
         operador = "/";
+        opera = true;
     }
 
     public void clickequal (View view){
         /*if (equal) {equal2 = true;}*/
-        equal = true;
+        if (equal) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+        }
         operation(view);
+        equal = true;
+        opera = false;
     }
 
     public void operation (View view) {
-        TextView text_result = (TextView) findViewById(R.id.text_result);
-        textscreen = text_result.getText().toString();
-        num2 = Double.parseDouble(textscreen);
+
+        if (!equal){
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            num2 = Double.parseDouble(textscreen);
+        }
         /*if (!equal2) {*/
-            switch (operador){
-                case "+": result = result + num2; break;
-                case "-": result = result - num2; break;
-                case "*": result = result * num2; break;
-                case "/": result = result / num2; break;
+        switch (operador){
+            case "+": result = result + num2; break;
+            case "-": result = result - num2; break;
+            case "*": result = result * num2; break;
+            case "/": result = result / num2; break;
                 //default:
-            }
-            equal = false;
-            textscreen = String.format("%f", result);
-            text_result.setText(textscreen);
+        }
+        TextView text_result = (TextView) findViewById(R.id.text_result);
+        equal = false;
+        textscreen = String.format("%f", result);
+        text_result.setText(textscreen);
         /*} else {
             switch (operador){
                 case "+": result = result + num2; break;
@@ -172,6 +216,7 @@ public class CalculatorActivity extends AppCompatActivity {
             textscreen = String.format("%f", result);
             text_result.setText(textscreen);
         }*/
+        res = true;
 
     }
 
