@@ -1,13 +1,14 @@
 /*
 FALTA:
-- treure els decimals "inútils"
-- al posar l'=, ha d'anar calcular
-- fer càlculs encadenats
+- treure els decimals "inútils"   -  FET! :)
+- al posar l'=, ha d'anar calcular - FET! :)
+- fer càlculs encadenats - FET! :)
+- Simplificar codi fent mètodes apart - FET! :)
+- Click CLEAR té problemes - FET! :)
+- Limitar els decimals en pantalla
+- Quan s'apreta qualsevol operador, no ha de netejar el nombre per pantalla - FET! :)
 
 */
-
-
-
 
 package edu.upc.pda.clemente.laura.calculadora;
 
@@ -21,11 +22,10 @@ public class CalculatorActivity extends AppCompatActivity {
     //ATRIBUTS
     double num2=0, result=0;
     String operador = "";
-    Boolean equal = false;
-    Boolean dot = false;
-    Boolean opera = false;
-    Boolean res = false;
-    //Boolean equal2 = false;
+    Boolean equal = false; //s'ha apretat el botó resultat
+    Boolean dot = false; //s'ha apretat el botó "." - per no escriure un altre punt en un mateix número
+    Boolean opera = false; //ha fet una operació
+    Boolean res = false; // s'ha calculat un resultat amb el mètode operation
     String textscreen = "";
 
     @Override
@@ -100,6 +100,7 @@ public class CalculatorActivity extends AppCompatActivity {
     public void clickdot(View view) {
         if (!dot){
             if (equal) clear(view);
+            if (res) clear(view); res = false;
             TextView text_result = (TextView) findViewById(R.id.text_result) ;
             text_result.setText(text_result.getText() + ".");
         }
@@ -109,73 +110,45 @@ public class CalculatorActivity extends AppCompatActivity {
     public void clickclear(View view) {
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText("");
-        equal = false;
-        //equal2 = false;
-        num2 = 0;
+        num2=0;
+        result=0;
         operador = "";
-        result = 0;
+        equal = false; //s'ha apretat el botó resultat
+        dot = false; //s'ha apretat el botó "." - per no escriure un altre punt en un mateix número
+        opera = false; //ha fet una operació
+        res = false; // s'ha calculat un resultat amb el mètode operation
+        textscreen = "";
     }
     public void clear(View view){
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
         text_result.setText("");
         dot = false;
         res = false;
-        //equal2 = false;
     }
 
     public void clickplus(View view) {
-        if (!opera) {
-            TextView text_result = (TextView) findViewById(R.id.text_result);
-            textscreen = text_result.getText().toString();
-            result = Double.parseDouble(textscreen);
-            clear(view);
-        } else {
-            operation(view);
-        }
+        isOpera(view);
         operador = "+";
         opera = true;
     }
     public void clickneg(View view) {
-        if (!opera) {
-            TextView text_result = (TextView) findViewById(R.id.text_result);
-            textscreen = text_result.getText().toString();
-            result = Double.parseDouble(textscreen);
-            clear(view);
-        } else {
-            operation(view);
-        }
+        isOpera(view);
         operador = "-";
         opera = true;
 
     }
     public void clickmult(View view) {
-        if (!opera) {
-            TextView text_result = (TextView) findViewById(R.id.text_result);
-            textscreen = text_result.getText().toString();
-            result = Double.parseDouble(textscreen);
-            clear(view);
-        }else {
-            operation(view);
-
-        }
+        isOpera(view);
         operador = "*";
         opera = true;
     }
     public void clickdiv(View view) {
-        if (!opera) {
-            TextView text_result = (TextView) findViewById(R.id.text_result);
-            textscreen = text_result.getText().toString();
-            result = Double.parseDouble(textscreen);
-            clear(view);
-        }else{
-            operation(view);
-        }
+        isOpera(view);
         operador = "/";
         opera = true;
     }
 
     public void clickequal (View view){
-        /*if (equal) {equal2 = true;}*/
         if (equal) {
             TextView text_result = (TextView) findViewById(R.id.text_result);
             textscreen = text_result.getText().toString();
@@ -186,6 +159,8 @@ public class CalculatorActivity extends AppCompatActivity {
         opera = false;
     }
 
+
+    //FER UNA OPERACIÓ
     public void operation (View view) {
 
         if (!equal){
@@ -193,7 +168,7 @@ public class CalculatorActivity extends AppCompatActivity {
             textscreen = text_result.getText().toString();
             num2 = Double.parseDouble(textscreen);
         }
-        /*if (!equal2) {*/
+
         switch (operador){
             case "+": result = result + num2; break;
             case "-": result = result - num2; break;
@@ -201,22 +176,31 @@ public class CalculatorActivity extends AppCompatActivity {
             case "/": result = result / num2; break;
                 //default:
         }
+
         TextView text_result = (TextView) findViewById(R.id.text_result);
         equal = false;
         textscreen = String.format("%f", result);
+
+        //ELIMINA ELS DECIMALS DEL FINAL
+        if(result%1==0){
+            int result_i = (int)result;
+            textscreen = ""+result_i;
+        }
+        else{textscreen = Double.toString(result);}
         text_result.setText(textscreen);
-        /*} else {
-            switch (operador){
-                case "+": result = result + num2; break;
-                case "-": result = result - num2; break;
-                case "*": result = result * num2; break;
-                case "/": result = result / num2; break;
-                //default:
-            }
-            textscreen = String.format("%f", result);
-            text_result.setText(textscreen);
-        }*/
         res = true;
+    }
+
+    //OBJ: PODER FER CADENES D'OPERACIONS. Detecta si ja s'ha fet una operació.
+    public void isOpera(View view){
+        if (!opera) {
+            TextView text_result = (TextView) findViewById(R.id.text_result);
+            textscreen = text_result.getText().toString();
+            result = Double.parseDouble(textscreen);
+            clear(view);
+        }else{
+            operation(view);
+        }
 
     }
 
