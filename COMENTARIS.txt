@@ -1,0 +1,22 @@
+
+- Quin lio de projectes!!! En el repositori només hi ha d'haver una còpia!
+
+- Posar un zip de 23Mb al repositori és un desastrillo (va lentíssim, etc.). La gràcia dels repositoris
+  és que tinguin només codi font, que són fitxers de text, que són molt petits!
+
+Guay:
+
+- Operacions bé.
+- Layout força bé (però no s'ajusta a la pantalla realment, perquè a mi em surt ben petit).
+- Càlculs molt bé. Funciona això de que s'enrecordi del nombre anterior per poder operar 
+  consecutivament.
+
+A millorar:
+
+- Que el layout s'ajusti a la pantalla. He estat intentant arreglar-lo sense tocar gaire cosa 
+  i costa massa, tal com està. Ja en parlarem.
+
+- Molta repetició en el codi. Es pot posar un sol mètode per tots els números i per a totes 
+  les operacions (ho he arreglat jo mateix). Ja està bé que ho hagueu fet així, perquè al 
+  veure la solució us agradarà molt... ;)
+
