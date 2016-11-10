@@ -17,6 +17,7 @@ package edu.upc.pda.clemente.laura.calculadora;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity {
@@ -39,66 +40,16 @@ public class CalculatorActivity extends AppCompatActivity {
 
     //MÈTODES
         //Detectem quan s'apreta cada botó
-    public void click0(View view) {
+
+    public void clickNumero(View view) {
+        Button button = (Button) view;
+        String num = button.getText().toString();
         if (equal) clear(view); equal = false; //equal2 = false;
         if (res) clear(view); res = false; //si 'operation' ha actuat, per tant tenim un resultat, res=true, s'ha de netejar vista per tornar a escriure un número nou.
         TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "0");
+        text_result.setText(text_result.getText() + num);
     }
-    public void click1(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "1");
-    }
-    public void click2(View view) {
-        if (equal) clear(view); equal = false;// equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "2");
-    }
-    public void click3(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "3");
-    }
-    public void click4(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "4");
-    }
-    public void click5(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "5");
-    }
-    public void click6(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "6");
-    }
-    public void click7(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "7");
-    }
-    public void click8(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "8");
-    }
-    public void click9(View view) {
-        if (equal) clear(view); equal = false; //equal2 = false;
-        if (res) clear(view); res = false;
-        TextView text_result = (TextView) findViewById(R.id.text_result) ;
-        text_result.setText(text_result.getText() + "9");
-    }
+
     public void clickdot(View view) {
         if (!dot){
             if (equal) clear(view);
@@ -128,25 +79,10 @@ public class CalculatorActivity extends AppCompatActivity {
         res = false;
     }
 
-    public void clickplus(View view) {
+    public void clickOp(View view) {
+        Button button =  (Button)view;
         isOpera(view);
-        operador = "+";
-        opera = true;
-    }
-    public void clickneg(View view) {
-        isOpera(view);
-        operador = "-";
-        opera = true;
-
-    }
-    public void clickmult(View view) {
-        isOpera(view);
-        operador = "*";
-        opera = true;
-    }
-    public void clickdiv(View view) {
-        isOpera(view);
-        operador = "/";
+        operador = button.getText().toString();
         opera = true;
     }
 
@@ -174,7 +110,7 @@ public class CalculatorActivity extends AppCompatActivity {
         switch (operador){
             case "+": result = result + num2; break;
             case "-": result = result - num2; break;
-            case "*": result = result * num2; break;
+            case "x": result = result * num2; break;
             case "/": result = result / num2; break;
                 //default:
         }
